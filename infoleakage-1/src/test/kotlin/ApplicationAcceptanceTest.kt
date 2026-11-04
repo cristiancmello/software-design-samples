@@ -32,6 +32,7 @@ class ApplicationAcceptanceTest {
         }
 
         val configFile = File(workDir, "config.ini")
+        configFile.delete()
         configFile.createNewFile()
 
         val contentOfFileBeforeRunApp = configFile.readText()
