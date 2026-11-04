@@ -9,6 +9,8 @@ class WalkingSkeletonTest {
             "java", "-cp", System.getProperty("java.class.path"), "org.example.MainKt"
         ).start()
 
+        process.outputStream.close()
+
         val output = process.inputStream.bufferedReader().readText()
 
         process.waitFor()
