@@ -35,6 +35,8 @@ class ApplicationAcceptanceTest {
 
         val output = process.inputStream.bufferedReader().readText()
 
+        process.outputStream.bufferedWriter().write("no")
+
         process.waitFor()
 
         assert("Do you wish to add new parameter? [yes/no]" in output) { "Failed to found question about to add new parameter" }
