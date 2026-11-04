@@ -2,6 +2,8 @@ package org.example
 
 import org.junit.jupiter.api.Test
 import java.io.File
+import kotlin.test.assertEquals
+import kotlin.test.assertSame
 
 class ApplicationAcceptanceTest {
     @Test
@@ -29,6 +31,11 @@ class ApplicationAcceptanceTest {
             it.mkdir()
         }
 
+        val configFile = File(workDir, "config.ini")
+        configFile.createNewFile()
+
+        val contentOfFileBeforeRunApp = configFile.readText()
+
         val process = ProcessBuilder(
             "java", "-cp", System.getProperty("java.class.path"), "org.example.MainKt"
         )
@@ -46,5 +53,8 @@ class ApplicationAcceptanceTest {
         process.waitFor()
 
         assert("Do you wish to add new parameter? [yes/no]" in output) { "Failed to found question about to add new parameter" }
+        val contentOfFileAfterRunApp = configFile.readText()
+
+        assertEquals(contentOfFileAfterRunApp, contentOfFileBeforeRunApp,"Not the same config file's content after run app")
     }
 }

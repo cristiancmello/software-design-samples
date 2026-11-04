@@ -9,4 +9,6 @@ fun main() {
 
     println("Do you wish to add new parameter? [yes/no]")
     readln()
+
+    File("config.ini").writeText("x")
 }
