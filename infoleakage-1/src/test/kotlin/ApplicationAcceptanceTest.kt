@@ -2,7 +2,6 @@ package org.example
 
 import org.junit.jupiter.api.Test
 import java.io.File
-import java.util.concurrent.TimeUnit
 
 class ApplicationAcceptanceTest {
     @Test
@@ -34,11 +33,15 @@ class ApplicationAcceptanceTest {
             .directory(workDir)
             .start()
 
+        process.outputStream.bufferedWriter().also {
+            it.write("no")
+            it.flush()
+            it.close()
+        }
+
         val output = process.inputStream.bufferedReader().readText()
 
-        process.outputStream.bufferedWriter().write("no")
-
-        process.waitFor(3, TimeUnit.SECONDS)
+        process.waitFor()
 
         assert("Do you wish to add new parameter? [yes/no]" in output) { "Failed to found question about to add new parameter" }
     }
