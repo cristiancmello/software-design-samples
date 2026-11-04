@@ -16,6 +16,8 @@ class ApplicationAcceptanceTest {
             .directory(workDir)
             .start()
 
+        process.outputStream.close()
+
         process.waitFor()
 
         assert("config.ini" in (workDir.list() ?: emptyArray())) { "config.ini not found in process's workdir " }
