@@ -1,13 +1,20 @@
 package org.example
 
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.io.TempDir
+import java.io.File
 
 class WalkingSkeletonTest {
+    @TempDir
+    private lateinit var workDir: File
+
     @Test
     fun `app starts and prints loading message`() {
         val process = ProcessBuilder(
             "java", "-cp", System.getProperty("java.class.path"), "org.example.MainKt"
-        ).start()
+        )
+            .directory(workDir)
+            .start()
 
         process.outputStream.close()
 
