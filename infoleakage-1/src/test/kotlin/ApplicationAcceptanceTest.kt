@@ -11,15 +11,7 @@ class ApplicationAcceptanceTest {
 
     @Test
     fun `app starts create a empty config file`() {
-        val process = ProcessBuilder(
-            "java", "-cp", System.getProperty("java.class.path"), "org.example.MainKt"
-        )
-            .directory(workDir)
-            .start()
-
-        process.outputStream.close()
-
-        process.waitFor()
+        runApp(workDir)
 
         assert("config.ini" in (workDir.list() ?: emptyArray())) { "config.ini not found in process's workdir " }
     }
@@ -27,26 +19,11 @@ class ApplicationAcceptanceTest {
     @Test
     fun `user declines to add a parameter and config file is unchanged`() {
         val configFile = File(workDir, "config.ini")
-        configFile.delete()
         configFile.createNewFile()
 
         val contentOfFileBeforeRunApp = configFile.readText()
 
-        val process = ProcessBuilder(
-            "java", "-cp", System.getProperty("java.class.path"), "org.example.MainKt"
-        )
-            .directory(workDir)
-            .start()
-
-        process.outputStream.bufferedWriter().also {
-            it.write("no")
-            it.flush()
-            it.close()
-        }
-
-        val output = process.inputStream.bufferedReader().readText()
-
-        process.waitFor()
+        val output = runApp(workDir, "no")
 
         assert("Do you wish to add new parameter? [yes/no]" in output) { "Failed to found question about to add new parameter" }
         val contentOfFileAfterRunApp = configFile.readText()
