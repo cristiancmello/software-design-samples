@@ -37,7 +37,7 @@ class ApplicationAcceptanceTest {
 
         val contentOfFileBeforeRunApp = configFile.readText()
 
-        val output = runApp(workDir, arrayListOf("yes"))
+        val output = runApp(workDir, arrayListOf("yes", "yes"))
 
         assert("Do you wish to add new parameter? [yes/no]" in output) { "Failed to found question about to add new parameter" }
         assert("Save configuration? [yes/no]" in output) { "Save configuration prompt is not present" }

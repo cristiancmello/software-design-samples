@@ -8,7 +8,10 @@ fun runApp(workDir: File, input: ArrayList<String> = arrayListOf()): String {
         .start()
 
     process.outputStream.bufferedWriter().use {
-        input.forEach { line -> it.write(line) }
+        input.forEach { line ->
+            it.write(line)
+            it.newLine()
+        }
     }
 
     val output = process.inputStream.bufferedReader().readText()
