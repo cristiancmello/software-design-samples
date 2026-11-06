@@ -29,6 +29,10 @@ class AppCli(
         }
 
         println("Save configuration? [yes/no]")
-        iniFileWriter.save(iniFile)
+        val saveConfig = console.readln()
+
+        if (saveConfig == "yes") {
+            iniFileWriter.save(iniFile)
+        }
     }
 }

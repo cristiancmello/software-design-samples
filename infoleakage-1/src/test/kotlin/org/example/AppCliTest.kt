@@ -3,7 +3,6 @@ package org.example
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verifyOrder
-import io.mockk.verifySequence
 import org.junit.jupiter.api.Test
 
 class AppCliTest {
@@ -17,7 +16,11 @@ class AppCliTest {
 
         every { iniFileReader.load() } returns IniFile()
         every { console.println(any<String>()) } returns Unit
-        every { console.readln() } returns "yes"
+        every { console.readln() } returns
+            "yes" andThen
+            "first" andThen
+            "value" andThen
+            "yes"
 
         appCli.run()
 
