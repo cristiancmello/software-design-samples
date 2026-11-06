@@ -1,5 +1,6 @@
 package org.example
 
+import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verifySequence
 import org.junit.jupiter.api.Test

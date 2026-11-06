@@ -1,12 +1,11 @@
 package org.example
 
-import java.io.File
-
 fun main() {
-    File("config.ini").createNewFile()
+    val configUpdater = ConfigUpdater()
+    val iniFileWriter = IniFileWriter()
+    val iniFileReader = IniFileReader()
 
-    println("Loading config file from config.ini")
-
-    println("Do you wish to add new parameter? [yes/no]")
-    readln()
+    AppCli(iniFileReader, iniFileWriter, configUpdater).apply {
+        run()
+    }
 }
