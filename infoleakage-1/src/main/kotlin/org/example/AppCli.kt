@@ -1,6 +1,7 @@
 package org.example
 
 import java.io.File
+import java.util.Map.entry
 
 class AppCli(
     val iniFileReader: IniFileReader,
@@ -14,7 +15,7 @@ class AppCli(
         println("Loading config file from config.ini")
 
         println("Do you wish to add new parameter? [yes/no]")
-        configUpdater.update()
+        configUpdater.update(IniFile(), entry("key", "value"))
 
         println("Save configuration? [yes/no]")
         iniFileWriter.save()
