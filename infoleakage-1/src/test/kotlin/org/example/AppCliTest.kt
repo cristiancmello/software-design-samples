@@ -13,6 +13,8 @@ class AppCliTest {
         val iniFileWriter = mockk<IniFileWriter>(relaxUnitFun = true)
         val appCli = AppCli(iniFileReader, iniFileWriter, configUpdater)
 
+        every { iniFileReader.load() } returns IniFile()
+
         appCli.run()
 
         verifySequence {
