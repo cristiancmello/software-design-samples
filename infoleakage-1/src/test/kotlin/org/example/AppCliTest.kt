@@ -20,7 +20,7 @@ class AppCliTest {
         verifySequence {
             iniFileReader.load()
             configUpdater.update(any(), any())
-            iniFileWriter.save()
+            iniFileWriter.save(any())
         }
     }
 }

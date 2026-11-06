@@ -18,6 +18,6 @@ class AppCli(
         configUpdater.update(IniFile(), entry("key", "value"))
 
         println("Save configuration? [yes/no]")
-        iniFileWriter.save()
+        iniFileWriter.save(IniFile())
     }
 }

@@ -10,4 +10,8 @@ class IniFile {
     fun getParameter(parameterName: String): Map<String, String> {
         return mapOf(parameterName to "value")
     }
+
+    fun getParameters(): Map<String, String> {
+        return parameters
+    }
 }
