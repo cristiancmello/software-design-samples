@@ -19,7 +19,13 @@ class AppCli(
         val addNewParameter = console.readln()
 
         if (addNewParameter == "yes") {
-            configUpdater.update(iniFile, entry("key", "value"))
+            console.println("Parameter name: ")
+            val parameterName = console.readln()
+
+            console.println("Parameter value: ")
+            val parameterValue = console.readln()
+
+            configUpdater.update(iniFile, entry(parameterName, parameterValue))
         }
 
         println("Save configuration? [yes/no]")
