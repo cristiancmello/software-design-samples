@@ -1,5 +1,6 @@
 package org.example
 
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import java.io.File
 import java.util.Map.entry
@@ -7,10 +8,14 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
 class IniFileWriterTest {
+    @AfterEach
+    fun tearDown() {
+        File("config.ini").delete()
+    }
+
     @Test
     fun `should write iniFile with updated entries`() {
         val configFile = File("config.ini").apply {
-            delete()
             createNewFile()
         }
 

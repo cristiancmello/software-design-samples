@@ -1,6 +1,5 @@
 package org.example
 
-import java.io.File
 import java.util.Map.entry
 
 class AppCli(
@@ -10,7 +9,6 @@ class AppCli(
     val console: AppConsole
 ) {
     fun run() {
-        File("config.ini").createNewFile()
         val iniFile = iniFileReader.load()
 
         println("Loading config file from config.ini")
