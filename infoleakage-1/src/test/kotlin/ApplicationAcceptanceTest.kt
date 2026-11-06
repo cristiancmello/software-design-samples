@@ -24,7 +24,7 @@ class ApplicationAcceptanceTest {
 
         val contentOfFileBeforeRunApp = configFile.readText()
 
-        val output = runApp(workDir, "no")
+        val output = runApp(workDir, arrayListOf("no"))
 
         assert("Do you wish to add new parameter? [yes/no]" in output) { "Failed to found question about to add new parameter" }
         val contentOfFileAfterRunApp = configFile.readText()
@@ -39,9 +39,11 @@ class ApplicationAcceptanceTest {
 
         val contentOfFileBeforeRunApp = configFile.readText()
 
-        val output = runApp(workDir, "yes")
+        val output = runApp(workDir, arrayListOf("yes", "yes"))
 
         assert("Do you wish to add new parameter? [yes/no]" in output) { "Failed to found question about to add new parameter" }
+        assert("Save configuration? [yes/no]" in output) { "Save configuration prompt is not present" }
+
         val contentOfFileAfterRunApp = configFile.readText()
 
         assertNotEquals(contentOfFileAfterRunApp, contentOfFileBeforeRunApp,"The config file's content should be different after run app")
