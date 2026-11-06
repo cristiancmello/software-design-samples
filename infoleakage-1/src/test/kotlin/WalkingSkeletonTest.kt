@@ -2,6 +2,7 @@ package org.example
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
+import runApp
 import java.io.File
 
 class WalkingSkeletonTest {

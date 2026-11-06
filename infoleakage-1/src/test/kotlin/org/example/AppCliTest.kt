@@ -2,6 +2,7 @@ package org.example
 
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verifyOrder
 import io.mockk.verifySequence
 import org.junit.jupiter.api.Test
 
@@ -11,13 +12,16 @@ class AppCliTest {
         val iniFileReader = mockk<IniFileReader>(relaxUnitFun = true)
         val configUpdater = mockk<ConfigUpdater>(relaxUnitFun = true)
         val iniFileWriter = mockk<IniFileWriter>(relaxUnitFun = true)
-        val appCli = AppCli(iniFileReader, iniFileWriter, configUpdater)
+        val console = mockk<AppConsole>(relaxUnitFun = true)
+        val appCli = AppCli(iniFileReader, iniFileWriter, configUpdater, console)
 
         every { iniFileReader.load() } returns IniFile()
+        every { console.println(any<String>()) } returns Unit
+        every { console.readln() } returns "yes"
 
         appCli.run()
 
-        verifySequence {
+        verifyOrder {
             iniFileReader.load()
             configUpdater.update(any(), any())
             iniFileWriter.save(any())

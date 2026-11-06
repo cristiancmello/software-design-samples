@@ -7,17 +7,22 @@ class AppCli(
     val iniFileReader: IniFileReader,
     val iniFileWriter: IniFileWriter,
     val configUpdater: ConfigUpdater,
+    val console: AppConsole
 ) {
     fun run() {
         File("config.ini").createNewFile()
-        iniFileReader.load()
+        val iniFile = iniFileReader.load()
 
         println("Loading config file from config.ini")
 
         println("Do you wish to add new parameter? [yes/no]")
-        configUpdater.update(IniFile(), entry("key", "value"))
+        val addNewParameter = console.readln()
+
+        if (addNewParameter == "yes") {
+            configUpdater.update(iniFile, entry("key", "value"))
+        }
 
         println("Save configuration? [yes/no]")
-        iniFileWriter.save(IniFile())
+        iniFileWriter.save(iniFile)
     }
 }
