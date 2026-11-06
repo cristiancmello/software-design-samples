@@ -44,6 +44,6 @@ class ApplicationAcceptanceTest {
         assert("Do you wish to add new parameter? [yes/no]" in output) { "Failed to found question about to add new parameter" }
         val contentOfFileAfterRunApp = configFile.readText()
 
-        assertNotEquals(contentOfFileAfterRunApp, contentOfFileBeforeRunApp,"Not the same config file's content after run app")
+        assertNotEquals(contentOfFileAfterRunApp, contentOfFileBeforeRunApp,"The config file's content should be different after run app")
     }
 }
