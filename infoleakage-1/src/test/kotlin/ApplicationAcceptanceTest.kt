@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
 import java.io.File
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
 class ApplicationAcceptanceTest {
     @TempDir
@@ -29,5 +30,20 @@ class ApplicationAcceptanceTest {
         val contentOfFileAfterRunApp = configFile.readText()
 
         assertEquals(contentOfFileAfterRunApp, contentOfFileBeforeRunApp,"Not the same config file's content after run app")
+    }
+
+    @Test
+    fun `user says 'yes' to add new parameter and config file is changed`() {
+        val configFile = File(workDir, "config.ini")
+        configFile.createNewFile()
+
+        val contentOfFileBeforeRunApp = configFile.readText()
+
+        val output = runApp(workDir, "yes")
+
+        assert("Do you wish to add new parameter? [yes/no]" in output) { "Failed to found question about to add new parameter" }
+        val contentOfFileAfterRunApp = configFile.readText()
+
+        assertNotEquals(contentOfFileAfterRunApp, contentOfFileBeforeRunApp,"Not the same config file's content after run app")
     }
 }
