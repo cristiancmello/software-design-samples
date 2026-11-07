@@ -9,7 +9,7 @@ class IniFileWriter {
 
             val lines = StringBuilder()
 
-            iniFile.getParameters().forEach { (key, value) -> lines.append("$key=$value\n") }
+            iniFile.getParameters().forEach { (key, value) -> lines.append("$key:$value\n") }
 
             writeText(lines.toString())
         }

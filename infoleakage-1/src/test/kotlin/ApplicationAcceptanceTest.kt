@@ -47,6 +47,6 @@ class ApplicationAcceptanceTest {
         val contentOfFileAfterRunApp = configFile.readText()
 
         assertNotEquals(contentOfFileAfterRunApp, contentOfFileBeforeRunApp,"The config file's content should be different after run app")
-        assert("first=value" in contentOfFileAfterRunApp) { "first=value should be in the config file's content after run app" }
+        assert("first:value" in contentOfFileAfterRunApp) { "first=value should be in the config file's content after run app" }
     }
 }

@@ -31,6 +31,6 @@ class IniFileWriterTest {
         val contentAfterSave = configFile.readText()
 
         assertNotEquals(contentBeforeSave, contentAfterSave, "Content after saved should be different")
-        assertEquals("key=value\n", contentAfterSave)
+        assertEquals("key:value\n", contentAfterSave)
     }
 }

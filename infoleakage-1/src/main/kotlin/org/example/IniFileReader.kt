@@ -12,7 +12,7 @@ class IniFileReader {
         val iniFile = IniFile()
 
         configFile.readLines().forEach { line ->
-            val entryComponents = line.split("=")
+            val entryComponents = line.split(":")
             iniFile.setParameter(entry(entryComponents[0], entryComponents[1]))
         }
 

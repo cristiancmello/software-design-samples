@@ -15,7 +15,7 @@ class IniFileReaderTest {
     fun `should load configuration file from ini file`() {
         File("config.ini").apply {
             createNewFile()
-            writeText("first=value")
+            writeText("first:value")
         }
 
         val iniFileReader = IniFileReader()
