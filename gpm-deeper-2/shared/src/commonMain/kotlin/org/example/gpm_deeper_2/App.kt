@@ -24,6 +24,7 @@ fun App() {
     var editorContentState by remember { mutableStateOf(TextFieldValue()) }
     val currentPosition = Position()
     val plainTextFile = File("plain.txt").also { it.createNewFile() }
+    val memory by memoryFlow().collectAsState(initial = MemoryInfo(0, 0, 0))
 
     MaterialTheme {
         Column(
@@ -55,6 +56,7 @@ fun App() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .fillMaxHeight(fraction = 0.8f)
                     .padding(top = 16.dp),
             ) {
                 TextField(
@@ -134,6 +136,14 @@ fun App() {
                         currentPosition.update(editorContentState.selection.start)
                     },
                 )
+            }
+
+            Row(modifier = Modifier.padding(top = 16.dp)) {
+                Column {
+                    Text("Used heap: ${memory.usedHeapMb} MB")
+                    Text("Total heap: ${memory.totalHeapMb} MB")
+                    Text("Max heap: ${memory.maxHeapMb} MB")
+                }
             }
         }
     }
